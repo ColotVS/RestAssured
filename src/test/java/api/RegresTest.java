@@ -99,4 +99,11 @@ public class RegresTest {
                 .delete("/api/users/2")
                 .then().log().all();
     }
+    @Test
+    public void updateUserTest(){
+        //Используя сервис https://reqres.in обновить информацию о пользователе и сравнить дату обновления с текущей датой на машине
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
+
+
+    }
 }

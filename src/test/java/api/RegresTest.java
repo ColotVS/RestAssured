@@ -1,11 +1,11 @@
 package api;
 
-import io.restassured.http.ContentType;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import static io.restassured.RestAssured.given;
 

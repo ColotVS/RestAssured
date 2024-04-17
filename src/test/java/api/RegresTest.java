@@ -4,6 +4,7 @@ package api;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.Clock;
 import java.util.List;
 
 
@@ -103,6 +104,19 @@ public class RegresTest {
     public void updateUserTest(){
         //Используя сервис https://reqres.in обновить информацию о пользователе и сравнить дату обновления с текущей датой на машине
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
+
+        UserTime user = new UserTime("morpheus","zion resident");
+        UserTimeResponse userTimeResponse = given()
+                .body(user)
+                .when()
+                .put("/api/users/2")
+                .then().log().all()
+                .extract().as(UserTimeResponse.class);
+        //Создаём регулярное выражение, которое обрезает миллисекунды во времени
+        String currentTime = Clock.systemUTC().instant().toString().replaceAll("(.{10})$","");      //Получаем текущее время системы за исключением миллисекунд
+        System.out.println(currentTime);
+        System.out.println(userTimeResponse.getUpdatedAt().replaceAll("(.{4})$",""));
+        Assert.assertEquals(currentTime, userTimeResponse.getUpdatedAt().replaceAll("(.{4})$","")); //Сравниваем текущее время со временем из запроса
 
 
     }

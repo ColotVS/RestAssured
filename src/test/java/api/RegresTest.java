@@ -86,5 +86,7 @@ public class RegresTest {
         List<Integer> years = data.stream().map(ColorsData::getYear).toList(); //Получаем список всех годов
         List<Integer> sortedYears = years.stream().sorted().toList();           //Сортируем полученный список
         Assert.assertEquals(sortedYears,years);                                 //Сравниваем отсортированный и полученный списки
+        System.out.println(years);
+        System.out.println(sortedYears);
     }
 }

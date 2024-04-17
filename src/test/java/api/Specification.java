@@ -1,5 +1,6 @@
 package api;
 
+import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -19,5 +20,9 @@ public class Specification {
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .build();
+    }
+    public static void installSpecification(RequestSpecification request,ResponseSpecification response){
+        RestAssured.requestSpecification = request;
+        RestAssured.responseSpecification = response;
     }
 }

@@ -89,5 +89,14 @@ public class RegresTest {
         System.out.println(years);
         System.out.println(sortedYears);
     }
+    @Test
+    public void deleteUserTest(){
+        //Используя сервис https://reqres.in попробовать удалить второго пользователя и сравнить статус-код
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(204)); //При выполнении ожидаем 204 статус-код
 
+        given()
+                .when()
+                .delete("/api/users/2")
+                .then().log().all();
+    }
 }

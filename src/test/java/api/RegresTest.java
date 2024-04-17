@@ -83,7 +83,8 @@ public class RegresTest {
                 .get("/api/unknown")
                 .then().log().all()
                 .extract().body().jsonPath().getList("data", ColorsData.class);
-
-
+        List<Integer> years = data.stream().map(ColorsData::getYear).toList(); //Получаем список всех годов
+        List<Integer> sortedYears = years.stream().sorted().toList();           //Сортируем полученный список
+        Assert.assertEquals(sortedYears,years);                                 //Сравниваем отсортированный и полученный списки
     }
 }

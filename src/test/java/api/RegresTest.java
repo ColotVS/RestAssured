@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 public class RegresTest {
     //Используя сервис https://reqres.in получить список пользователей со второй страницы.
     //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
-    //Убедиться что email пользователей имеет окончание regres.in
+    //Убедиться что email пользователей имеет окончание reqres.in
     private static final String URL = "https://reqres.in";
     @Test
     public void checkAvatarAndIdTest(){
@@ -23,5 +23,6 @@ public class RegresTest {
                 .extract().body().jsonPath().getList("data", UserData.class); //Извлекаем Json в формате UserData
         users.forEach(x-> Assert.assertTrue(x.getAvatar().contains(x.getId().toString()))); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
 
+        Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in"))); //Убедиться что email пользователей имеет окончание reqres.in
     }
 }

@@ -16,7 +16,7 @@ public class RegresTest {
         //Используя сервис https://reqres.in получить список пользователей со второй страницы.
         //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
         //Убедиться что email пользователей имеет окончание reqres.in
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
         List<UserData> users = given()  //Статичный метод given() RestAssured
                 .when()
                 .get("/api/users?page=2")//Указываем запрос и ссылку
@@ -38,7 +38,7 @@ public class RegresTest {
         //Необходимо создание 2 тестов:
         //- успешная регистрация;
         //Проверить коды ошибок
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
         Integer id = 4;
         String token = "QpwL5tke4Pnpja7X4";
         Register user = new Register("eve.holt@reqres.in","pistol");
@@ -59,7 +59,7 @@ public class RegresTest {
     @Test
     public void unSuccessRegisterTest(){
         //- регистрация с ошибкой из-за отсутствия пароля.
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationError400());
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(400));
 
         Register user = new Register("sydney@fife","");
 
@@ -76,7 +76,7 @@ public class RegresTest {
     @Test
     public void colorsDataTest(){
         //Используя сервис https://reqres.in убедиться, что операция LIST<RESOURCE> возвращает данные отсортированные по годам
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
 
         List<ColorsData> data = given()
                 .when()
@@ -89,4 +89,5 @@ public class RegresTest {
         System.out.println(years);
         System.out.println(sortedYears);
     }
+
 }

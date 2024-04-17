@@ -33,7 +33,7 @@ public class RegresTest {
         }
     }
     @Test
-    public void successRegTest(){
+    public void successRegisterTest(){
         //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
         //Необходимо создание 2 тестов:
         //- успешная регистрация;
@@ -57,8 +57,8 @@ public class RegresTest {
     }
 
     @Test
-    public void unsuccessRegTest(){
+    public void unSuccessRegisterTest(){
         //- регистрация с ошибкой из-за отсутствия пароля.
-        
+
     }
 }

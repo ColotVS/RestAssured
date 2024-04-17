@@ -40,5 +40,17 @@ public class RegresTest {
         //- регистрация с ошибкой из-за отсутствия пароля.
         //Проверить коды ошибок
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+        Integer id = 4;
+        String token = "QpwL5tke4Pnpja7X4";
+        Register user = new Register("eve.holt@reqres.in","pistol");
+        SuccessRegister successRegister = given()
+                .body(user)
+                .when()
+                .post("/api/register")
+                .then().log().all()
+                .extract().as(SuccessRegister.class);       //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
+        Assert.assertEquals(id,successRegister.getId());    //- успешная регистрация;
+        Assert.assertEquals(token,successRegister.getToken());
+
     }
 }

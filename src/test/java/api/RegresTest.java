@@ -37,7 +37,6 @@ public class RegresTest {
         //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
         //Необходимо создание 2 тестов:
         //- успешная регистрация;
-        //- регистрация с ошибкой из-за отсутствия пароля.
         //Проверить коды ошибок
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
         Integer id = 4;
@@ -53,8 +52,13 @@ public class RegresTest {
         Assert.assertNotNull(successRegister.getId());      //Проверка, что пришёл не пустой ответ
         Assert.assertNotNull(successRegister.getToken());
 
-        Assert.assertEquals(id,successRegister.getId());    //- успешная регистрация;
+        Assert.assertEquals(id,successRegister.getId());    //Успешная регистрация;
         Assert.assertEquals(token,successRegister.getToken());
+    }
 
+    @Test
+    public void unsuccessRegTest(){
+        //- регистрация с ошибкой из-за отсутствия пароля.
+        
     }
 }

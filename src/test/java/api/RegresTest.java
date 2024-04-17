@@ -16,7 +16,7 @@ public class RegresTest {
     private static final String URL = "https://reqres.in";
     @Test
     public void checkAvatarAndIdTest(){
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationError400());
         List<UserData> users = given()  //Статичный метод given() RestAssured
                 .when()
                 .get("/api/users?page=2")//Указываем запрос и ссылку

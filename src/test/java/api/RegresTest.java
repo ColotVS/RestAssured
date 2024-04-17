@@ -59,6 +59,17 @@ public class RegresTest {
     @Test
     public void unSuccessRegisterTest(){
         //- регистрация с ошибкой из-за отсутствия пароля.
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationError400());
 
+        Register user = new Register("sydney@fife","");
+
+        UnSuccessRegister unSuccessRegister = given()
+                .body(user)
+                .when()
+                .post("/api/register")
+                .then().log().all()
+                .extract().as(UnSuccessRegister.class);
+
+        Assert.assertEquals("Missing password",unSuccessRegister.getError());
     }
 }

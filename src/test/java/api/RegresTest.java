@@ -117,7 +117,5 @@ public class RegresTest {
         System.out.println(currentTime);
         System.out.println(userTimeResponse.getUpdatedAt().replaceAll("(.{4})$",""));
         Assert.assertEquals(currentTime, userTimeResponse.getUpdatedAt().replaceAll("(.{4})$","")); //Сравниваем текущее время со временем из запроса
-
-
     }
 }

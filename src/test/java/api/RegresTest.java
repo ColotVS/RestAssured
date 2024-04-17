@@ -22,14 +22,23 @@ public class RegresTest {
                 .get("/api/users?page=2")//Указываем запрос и ссылку
                 .then().log().all()             //Выводим лог в консоль
                 .extract().body().jsonPath().getList("data", UserData.class); //Извлекаем Json в формате UserData
-        //users.forEach(x-> Assert.assertTrue(x.getAvatar().contains(x.getId().toString()))); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
+        users.forEach(x-> Assert.assertTrue(x.getAvatar().contains(x.getId().toString()))); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
 
-        //Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in"))); //Убедиться что email пользователей имеет окончание reqres.in
+        Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in"))); //Убедиться что email пользователей имеет окончание reqres.in
 
         List <String> avatars = users.stream().map(UserData::getAvatar).toList();
         List <String> ids = users.stream().map(x->x.getId().toString()).toList();
         for (int i = 0; i < avatars.size(); i++) {
             Assert.assertTrue(avatars.get(i).contains(ids.get(i)));
         }
+    }
+    @Test
+    public void successRegTest(){
+        //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
+        //Необходимо создание 2 тестов:
+        //- успешная регистрация;
+        //- регистрация с ошибкой из-за отсутствия пароля.
+        //Проверить коды ошибок
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
     }
 }

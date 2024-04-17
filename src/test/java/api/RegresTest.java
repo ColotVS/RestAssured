@@ -72,4 +72,18 @@ public class RegresTest {
 
         Assert.assertEquals("Missing password",unSuccessRegister.getError());
     }
+
+    @Test
+    public void colorsDataTest(){
+        //Используя сервис https://reqres.in убедиться, что операция LIST<RESOURCE> возвращает данные отсортированные по годам
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
+
+        List<ColorsData> data = given()
+                .when()
+                .get("/api/unknown")
+                .then().log().all()
+                .extract().body().jsonPath().getList("data", ColorsData.class);
+
+
+    }
 }

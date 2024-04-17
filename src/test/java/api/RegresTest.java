@@ -49,6 +49,10 @@ public class RegresTest {
                 .post("/api/register")
                 .then().log().all()
                 .extract().as(SuccessRegister.class);       //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
+
+        Assert.assertNotNull(successRegister.getId());      //Проверка, что пришёл не пустой ответ
+        Assert.assertNotNull(successRegister.getToken());
+
         Assert.assertEquals(id,successRegister.getId());    //- успешная регистрация;
         Assert.assertEquals(token,successRegister.getToken());
 

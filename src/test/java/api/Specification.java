@@ -10,23 +10,23 @@ import io.restassured.specification.ResponseSpecification;
 
 
 public class Specification {
-    public static RequestSpecification requestSpecification(String url){
+    public static RequestSpecification requestSpecification(String url){    //Задаем параметры
         return new RequestSpecBuilder()
                 .setBaseUri(url)
                 .setContentType(ContentType.JSON)
                 .build();
     }
-    public static ResponseSpecification responseSpecificationOK200(){
+    public static ResponseSpecification responseSpecificationOK200(){       //Если запрос возвращает код 200 выполнение программы продолжается, иначе остановка без выполнения.
         return new ResponseSpecBuilder()
                 .expectStatusCode(200)
                 .build();
     }
-    public static ResponseSpecification responseSpecificationError400(){
+    public static ResponseSpecification responseSpecificationError400(){    //Если запрос возвращает код 400 выполнение программы продолжается, иначе остановка без выполнения.
         return new ResponseSpecBuilder()
                 .expectStatusCode(400)
                 .build();
     }
-    public static void installSpecification(RequestSpecification request,ResponseSpecification response){
+    public static void installSpecification(RequestSpecification request,ResponseSpecification response){   //Установка спецификаций
         RestAssured.requestSpecification = request;
         RestAssured.responseSpecification = response;
     }

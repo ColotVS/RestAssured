@@ -10,13 +10,13 @@ import java.util.stream.Collectors;
 import static io.restassured.RestAssured.given;
 
 public class RegresTest {
-    //Используя сервис https://reqres.in получить список пользователей со второй страницы.
-    //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
-    //Убедиться что email пользователей имеет окончание reqres.in
     private static final String URL = "https://reqres.in";
     @Test
     public void checkAvatarAndIdTest(){
-        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationError400());
+        //Используя сервис https://reqres.in получить список пользователей со второй страницы.
+        //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
+        //Убедиться что email пользователей имеет окончание reqres.in
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationOK200());
         List<UserData> users = given()  //Статичный метод given() RestAssured
                 .when()
                 .get("/api/users?page=2")//Указываем запрос и ссылку
@@ -26,8 +26,8 @@ public class RegresTest {
 
         //Assert.assertTrue(users.stream().allMatch(x->x.getEmail().endsWith("@reqres.in"))); //Убедиться что email пользователей имеет окончание reqres.in
 
-        List <String> avatars = users.stream().map(UserData::getAvatar).collect(Collectors.toList());
-        List <String> ids = users.stream().map(x->x.getId().toString()).collect(Collectors.toList());
+        List <String> avatars = users.stream().map(UserData::getAvatar).toList();
+        List <String> ids = users.stream().map(x->x.getId().toString()).toList();
         for (int i = 0; i < avatars.size(); i++) {
             Assert.assertTrue(avatars.get(i).contains(ids.get(i)));
         }

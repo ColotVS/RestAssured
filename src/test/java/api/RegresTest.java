@@ -22,5 +22,6 @@ public class RegresTest {
                 .then().log().all()             //Выводим лог в консоль
                 .extract().body().jsonPath().getList("data", UserData.class); //Извлекаем Json в формате UserData
         users.forEach(x-> Assert.assertTrue(x.getAvatar().contains(x.getId().toString()))); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
+
     }
 }

@@ -52,5 +52,12 @@ public class RegresNoPojoTest{
         Map<String,String> user = new HashMap<>(); //Создаём хэш-карту для указания запроса
         user.put("email","eve.holt@reqres.in");    //Заполняем хэш-карту требуемыми данными
         user.put("password","pistol");
+        given()         //Пример post запроса
+                .body(user)
+                .when()
+                .post("/api/register")
+                .then().log().all()
+                .body("id",equalTo(4))
+                .body("token", equalTo("QpwL5tke4Pnpja7X4"));
     }
 }

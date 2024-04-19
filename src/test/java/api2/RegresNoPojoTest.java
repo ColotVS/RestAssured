@@ -50,5 +50,7 @@ public class RegresNoPojoTest{
         //Проверить коды ошибок
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
         Map<String,String> user = new HashMap<>(); //Создаём хэш-карту для указания запроса
+        user.put("email","eve.holt@reqres.in");    //Заполняем хэш-карту требуемыми данными
+        user.put("password","pistol");
     }
 }

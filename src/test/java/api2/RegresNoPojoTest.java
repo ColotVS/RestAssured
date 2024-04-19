@@ -6,7 +6,9 @@ import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -39,5 +41,14 @@ public class RegresNoPojoTest{
         }
         List<String> emails = jsonPath.get("data.email");
         Assert.assertTrue(emails.stream().allMatch(x->x.endsWith("@reqres.in")));   //Убедиться что email пользователей имеет окончание reqres.in
+    }
+    @Test
+    public void successRegisterNoPojoTest(){
+        //Используя сервис https://reqres.in протестировать регистрацию пользователя в системе
+        //Необходимо создание 2 тестов:
+        //- успешная регистрация;
+        //Проверить коды ошибок
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
+        Map<String,String> user = new HashMap<>(); //Создаём хэш-карту для указания запроса
     }
 }

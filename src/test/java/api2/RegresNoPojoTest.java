@@ -3,6 +3,7 @@ package api2;
 import api.Specification;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -32,8 +33,9 @@ public class RegresNoPojoTest{
                 .extract().response();
         JsonPath jsonPath = response.jsonPath(); //Извлекаем ответ в jsonPath
         List<String> avatars = jsonPath.get("data.avatar"); //Получаем список всех полей аватар
-        System.out.println(avatars);
         List<Integer> ids = jsonPath.get("data.id");        //Получаем список всех полей id
-        System.out.println(ids);
+        for (int i = 0; i < avatars.size(); i++) {
+            Assert.assertTrue(avatars.get(i).contains(ids.get(i).toString())); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
+        }
     }
 }

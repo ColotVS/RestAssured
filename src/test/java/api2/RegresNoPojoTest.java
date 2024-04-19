@@ -37,5 +37,7 @@ public class RegresNoPojoTest{
         for (int i = 0; i < avatars.size(); i++) {
             Assert.assertTrue(avatars.get(i).contains(ids.get(i).toString())); //Убедиться что имена файлов аватаров пользователей включают ID пользователей.
         }
+        List<String> emails = jsonPath.get("data.email");
+        Assert.assertTrue(emails.stream().allMatch(x->x.endsWith("@reqres.in")));   //Убедиться что email пользователей имеет окончание reqres.in
     }
 }

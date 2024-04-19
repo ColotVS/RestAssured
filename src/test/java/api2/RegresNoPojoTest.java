@@ -74,4 +74,18 @@ public class RegresNoPojoTest{
         Assert.assertEquals(4,id);
         Assert.assertEquals("QpwL5tke4Pnpja7X4",token);
     }
+    @Test
+    public void unSuccessRegisterNoPojoTest() {
+        //- регистрация с ошибкой из-за отсутствия пароля.
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(400));
+        Map<String,String> user = new HashMap<>();
+        user.put("email","eve.holt@reqres.in");
+        user.put("password","");
+        given()
+                .body(user)
+                .when()
+                .post("/api/register")
+                .then().log().all()
+                .body("error", equalTo("Missing password"));
+    }
 }

@@ -59,5 +59,19 @@ public class RegresNoPojoTest{
                 .then().log().all()
                 .body("id",equalTo(4))
                 .body("token", equalTo("QpwL5tke4Pnpja7X4"));
+
+        //Аналогичную проверку можно сделать через Response
+
+        Response response = given()
+                .body(user)
+                .when()
+                .post("/api/register")
+                .then()
+                .extract().response();
+        JsonPath jsonPath = response.jsonPath();
+        int id = jsonPath.get("id");
+        String token = jsonPath.get("token");
+        Assert.assertEquals(4,id);
+        Assert.assertEquals("QpwL5tke4Pnpja7X4",token);
     }
 }

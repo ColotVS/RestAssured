@@ -45,4 +45,15 @@ public class PetstroreTest {
                 .post("/pet")
                 .then().log().all();
     }
+
+    /**
+     * Работа с методом PUT
+     * Обновление информации о животном
+     */
+    @Test
+    public void checkUpdateAddPetTest(){
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
+
+
+    }
 }

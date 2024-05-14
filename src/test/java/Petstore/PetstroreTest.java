@@ -53,7 +53,11 @@ public class PetstroreTest {
     @Test
     public void checkUpdateAddPetTest(){
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
-
-
+        PetUpdate pet = new PetUpdate(123,"Шеричка","available");
+        given()
+                .body(pet)
+                .when()
+                .put("/pet")
+                .then().log().all();
     }
 }

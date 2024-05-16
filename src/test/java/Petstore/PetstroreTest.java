@@ -90,6 +90,7 @@ public class PetstroreTest {
     /**
      * Работа с методом GET
      * Поиск информации о животном по id
+     * no POJO
      */
      @Test
     public void checkGetIdPetTest(){

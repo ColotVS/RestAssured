@@ -49,11 +49,31 @@ public class PetstroreTest {
     /**
      * Работа с методом PUT
      * Обновление информации о животном
+     * Позитивный сценарий
      */
     @Test
     public void checkUpdateAddPetTest(){
         Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(200));
         PetUpdate pet = new PetUpdate(123,"Шеричка","available");
+        given()
+                .body(pet)
+                .when()
+                .put("/pet")
+                .then().log().all();
+    }
+
+    /**
+     * Работа с методом PUT
+     * Обновление информации о животном
+     * Негативный сценарий
+     */
+    @Test
+    public void checkUnSucUpdateTest(){
+        Specification.installSpecification(Specification.requestSpecification(URL),Specification.responseSpecificationUnique(500));
+        Map<String,String> pet = new HashMap<>();
+        pet.put("id","invalidInput%^&"); //Вводим некорректные данные id
+        pet.put("name","Шеричка");
+        pet.put("status","available");
         given()
                 .body(pet)
                 .when()
